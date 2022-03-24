@@ -1,0 +1,14 @@
+version: "3.4"
+
+services:
+  mariadb:
+    image: mariadb:10.6
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=foo
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "--silent" ]
+      start_period: 30s
+    ports:
+      - "3306:3306"
